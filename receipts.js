@@ -6,6 +6,8 @@ function initReceipts() {
     const formattedDate = currentDate.toLocaleDateString('en-US', options);
     dateMessage.textContent = `Receipts for ${formattedDate}`;
 
+
+
     // Add a click event listener to the "Enter a New Receipt" button
     const newReceiptButton = document.getElementById("newReceiptButton");
     newReceiptButton.addEventListener("click", displayNewReceiptForm);
@@ -20,37 +22,42 @@ function displayNewReceiptForm() {
     const fieldNames = ["Date", "Deputy", "Type", "CAUV", "Quantity", "Price", "Payment Type", "Check Number", "Name", "Name Custom", "Void", "Receipt Number"];
 
     fieldNames.forEach(fieldName => {
+        const container = document.createElement("div");
+		
         const label = document.createElement("label");
         label.textContent = `${fieldName}: `;
 
-        const input = document.createElement("input");
-        input.type = "text";
-        input.name = fieldName.toLowerCase().replace(/\s/g, ''); // Convert field name to lowercase and remove spaces
 
-        // Automatically fill in the date and time for the "Date" field
         if (fieldName === "Date") {
+            // Automatically fill in the date and time
+            const input = document.createElement("input");
+            input.type = "text";
             input.value = new Date().toLocaleString(); // Current date and time
             input.disabled = true;
-        }
-
-        // Create a drop-down selector for the "Type" field
-        if (fieldName === "Type") {
+            container.appendChild(label);
+            container.appendChild(input);
+        } else if (fieldName === "Deputy") {
+            // Automatically fill in with the current user (assuming you have a user object)
+            const input = document.createElement("input");
+            input.type = "text";
+            // Replace 'currentUser' with the actual object or mechanism to get the current user
+            input.value = "John Doe"; // Replace with actual user data
+            input.disabled = true;
+            container.appendChild(label);
+            container.appendChild(input);
+        } else if (fieldName === "Type") {
+            // Create a drop-down selector for the "Type" field
             const select = document.createElement("select");
-            select.name = "type";
-            const typeOptions = ["Copies", "CAUV", "CAUV Recoupment", "No Transfer Necessary", "Auditor Deed"];
+			select.name = "Type";
+			const typeOptions = ["Copies", "CAUV", "CAUV Recoupment", "No Transfer Necessary", "Auditor Deed"];
             typeOptions.forEach(option => {
-                const optionElement = document.createElement("option");
+				const optionElement = document.createElement("option");
                 optionElement.value = option;
                 optionElement.textContent = option;
                 select.appendChild(optionElement);
             });
-            input.remove(); // Remove the text input for the "Type" field
-            form.appendChild(label);
-            form.appendChild(select);
-        }
-
-        // Create a drop-down selector for the "Payment Type" field
-        if (fieldName === "Payment Type") {
+        } else if (fieldName === "Payment Type") {
+            // Create a drop-down selector for Payment Type
             const select = document.createElement("select");
             select.name = "paymentType";
             const paymentOptions = ["Check", "Cash", "Credit"];
@@ -60,33 +67,31 @@ function displayNewReceiptForm() {
                 optionElement.textContent = option;
                 select.appendChild(optionElement);
             });
-            input.remove(); // Remove the text input for the "Payment Type" field
-            form.appendChild(label);
-            form.appendChild(select);
-        }
-
-        // Create a drop-down selector for the "Void" field
-        if (fieldName === "Void") {
+            container.appendChild(label);
+            container.appendChild(select);
+        } else if (fieldName === "Void") {
+            // Create a drop-down selector for Payment Type
             const select = document.createElement("select");
-            select.name = "voidStatus";
-            const voidOptions = ["No", "Yes", "Unknown"];
-            voidOptions.forEach(option => {
+            select.name = "paymentType";
+            const paymentOptions = ["No", "Yes", "Unknown"];
+            paymentOptions.forEach(option => {
                 const optionElement = document.createElement("option");
                 optionElement.value = option;
                 optionElement.textContent = option;
                 select.appendChild(optionElement);
             });
-            input.remove(); // Remove the text input for the "Void" field
-            form.appendChild(label);
-            form.appendChild(select);
+            container.appendChild(label);
+            container.appendChild(select);
+        } else {
+            // For other fields, create a regular text input
+            const input = document.createElement("input");
+            input.type = "text";
+            input.name = fieldName.toLowerCase().replace(/\s/g, ''); // Convert field name to lowercase and remove spaces
+            container.appendChild(label);
+            container.appendChild(input);
         }
 
-        // For other fields, add the regular text input
-        if (fieldName !== "Type" && fieldName !== "Payment Type" && fieldName !== "Void") {
-            form.appendChild(label);
-            form.appendChild(input);
-        }
-
+        form.appendChild(container);
         form.appendChild(document.createElement("br"));
     });
 
@@ -99,15 +104,41 @@ function displayNewReceiptForm() {
     form.appendChild(saveButton);
 
     // Append the form to the container
-    const container = document.querySelector(".container");
+    const container = document.querySelector(".receipts-container");
     container.innerHTML = ''; // Clear existing content
     container.appendChild(form);
+	
+	container.style.display = 'block';
 }
 
 // Function to handle the click event for the "Save Receipt" button
 function saveReceipt() {
     // Add your logic here to save the receipt data
     alert("Receipt data saved!");
+}
+
+// Function to create a text input field
+function createInputField(type, value, disabled) {
+    const input = document.createElement("input");
+    input.type = type;
+    input.value = value;
+    input.disabled = disabled;
+    return input;
+}
+
+// Function to create a drop-down selector
+function createSelectField(name, options) {
+    const select = document.createElement("select");
+    select.name = name;
+    
+    options.forEach(option => {
+        const optionElement = document.createElement("option");
+        optionElement.value = option;
+        optionElement.textContent = option;
+        select.appendChild(optionElement);
+    });
+
+    return select;
 }
 
 // Call the initialization function when the page loads

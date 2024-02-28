@@ -20,6 +20,7 @@ header {
 
 /* Navigation styles */
 nav {
+    padding: 10px;
     display: flex;
     justify-content: center;
 }
@@ -31,12 +32,52 @@ ul {
 
 li {
     margin: 0 15px;
+    transition: transform 0.2s ease-in-out;
 }
 
 a {
     text-decoration: none;
     color: white;
+    transition: transform 0.2s ease-in-out;
 }
+
+li:hover, a:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+/* Style for the Archive Dropdown */
+.archive-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.archive-link, .archive-submenu li {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out;
+}
+
+.archive-link:hover, .archive-submenu li:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.archive-submenu {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.archive-dropdown:hover .archive-submenu {
+    display: block;
+}
+
 
 /* Transfer Room Admin Page styles */
 .container {
@@ -227,4 +268,149 @@ footer {
 
 .login-register p a:hover {
     text-decoration: underline;
+}
+
+
+/*Dashboard*/
+
+
+div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Adjust margin as needed */
+}
+
+.dashboard-container label {
+    width: 135px; /* Adjust width as needed */
+    cursor: pointer; /* Add pointer cursor to labels */
+}
+
+.dashboard-container input,
+.dashboard-container select {
+    flex: 1;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Add a border for better visibility */
+    cursor: pointer; /* Add pointer cursor */
+}
+
+.dashboard-container input:hover,
+.dashboard-container select:hover {
+    border-color: #E74C3C; /* Change border color on hover */
+}
+.dashboard-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background: url('images/coveredBridge.jpg') no-repeat center/cover;
+}
+
+.dashboard-container {
+    max-width: 600px;
+    margin: 20px auto;
+    border-radius: 10px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    position: relative; /* Set position to relative to allow z-index to work */
+    z-index: 1; /* Bring it to the front */
+    overflow: hidden; /* Hide overflow from the background */
+    display: none; /* Initially hide the form container */
+}
+
+#newConveyanceButton {
+    margin-top: 20px;
+}
+
+/*Receipts*/
+.receipts-container {
+    max-width: 600px;
+    margin: 20px auto;
+    border-radius: 10px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    position: relative; /* Set position to relative to allow z-index to work */
+    z-index: 1; /* Bring it to the front */
+    overflow: hidden; /* Hide overflow from the background */
+    display: none; /* Initially hide the form container */
+}
+
+.receipts-container label {
+    width: 135px; /* Adjust width as needed */
+    cursor: pointer; /* Add pointer cursor to labels */
+}
+.receipts-container input,
+.receipts-container select {
+    flex: 1;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Add a border for better visibility */
+    cursor: pointer; /* Add pointer cursor */
+}
+.receipts-container input:hover,
+.receipts-container select:hover {
+    border-color: #E74C3C; /* Change border color on hover */
+}
+.receipts-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.newReceiptButton {
+    padding: 10px;
+    background-color: #ff0000; /* Red */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.newReceiptButton:hover {
+    background-color: #990000; /* Darker Red on hover */
+}
+
+.receipt-form {
+    margin-top: 20px;
+}
+
+.receipt-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.receipt-input, .receipt-textarea, .receipt-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border-radius: 5px; /* Rounded corners */
+    border: 1px solid #ccc; /* Add a border for better visibility */
+}
+
+.receipt-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.receipt-th, .receipt-td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.receipt-th {
+    background-color: #666;
+    color: white;
+}
+
+.receipt-footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
 }

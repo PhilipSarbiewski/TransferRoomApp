@@ -5,6 +5,8 @@ function initDashboard() {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const formattedDate = currentDate.toLocaleDateString('en-US', options);
     dateMessage.textContent = `Conveyances for ${formattedDate}`;
+	
+
 
     // Add a click event listener to the "Enter a New Conveyance" button
     const newConveyanceButton = document.getElementById("newConveyanceButton");
@@ -20,6 +22,8 @@ function displayNewConveyanceForm() {
     const fieldNames = ["Date", "Number", "Payment Type", "Transfer Tax", "Conveyance Fee", "Name", "Name Custom", "Deputy", "Tax Year"];
 
     fieldNames.forEach(fieldName => {
+        const container = document.createElement("div"); // Add a container for each label-input pair
+
         const label = document.createElement("label");
         label.textContent = `${fieldName}: `;
 
@@ -29,8 +33,8 @@ function displayNewConveyanceForm() {
             input.type = "text";
             input.value = new Date().toLocaleString(); // Current date and time
             input.disabled = true;
-            form.appendChild(label);
-            form.appendChild(input);
+            container.appendChild(label);
+            container.appendChild(input);
         } else if (fieldName === "Payment Type") {
             // Create a drop-down selector for Payment Type
             const select = document.createElement("select");
@@ -42,8 +46,8 @@ function displayNewConveyanceForm() {
                 optionElement.textContent = option;
                 select.appendChild(optionElement);
             });
-            form.appendChild(label);
-            form.appendChild(select);
+            container.appendChild(label);
+            container.appendChild(select);
         } else if (fieldName === "Deputy") {
             // Automatically fill in with the current user (assuming you have a user object)
             const input = document.createElement("input");
@@ -51,17 +55,18 @@ function displayNewConveyanceForm() {
             // Replace 'currentUser' with the actual object or mechanism to get the current user
             input.value = "John Doe"; // Replace with actual user data
             input.disabled = true;
-            form.appendChild(label);
-            form.appendChild(input);
+            container.appendChild(label);
+            container.appendChild(input);
         } else {
             // For other fields, create a regular text input
             const input = document.createElement("input");
             input.type = "text";
             input.name = fieldName.toLowerCase().replace(/\s/g, ''); // Convert field name to lowercase and remove spaces
-            form.appendChild(label);
-            form.appendChild(input);
+            container.appendChild(label);
+            container.appendChild(input);
         }
 
+        form.appendChild(container); // Append the container instead of label-input pair
         form.appendChild(document.createElement("br"));
     });
 
@@ -74,9 +79,11 @@ function displayNewConveyanceForm() {
     form.appendChild(saveButton);
 
     // Append the form to the container
-    const container = document.querySelector(".container");
+    const container = document.querySelector(".dashboard-container");
     container.innerHTML = ''; // Clear existing content
     container.appendChild(form);
+	
+	container.style.display = 'block';
 }
 
 // Function to handle the click event for the "Save" button
