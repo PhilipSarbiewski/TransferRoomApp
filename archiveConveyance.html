@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Room - Conveyance Archives</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+				<li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="#">Daily Transfer</a></li>
+                <li><a href="relocations.html">Relocations</a></li>
+                <li><a href="#">Advanced Search</a></li>
+                <li><a href="dailyPay.html">Daily Pay-In</a></li>
+				<!-- Archive Dropdown -->
+            <li class="archive-dropdown">
+                <a href="#" class="archive-link">Archive</a>
+                <ul class="archive-submenu">
+                    <li><a href="archiveConveyance.html">Conveyance Archives</a></li>
+                    <li><a href="archiveReceipts.html">Receipts Archives</a></li>
+                    <li><a href="archiveMobile.html">Mobile Home Archives</a></li>
+                </ul>
+            </li>
+                <li><a href="login.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Title Section -->
+    <div class="header-text">
+        <h1>Conveyance Archives</h1>
+    </div>
+
+    <!-- Search by Date Section -->
+    <div class="search-section">
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate">
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate">
+        <button id="searchButton">Search</button>
+    </div>
+
+    <!-- Display Total Number Found -->
+    <div id="totalFound">Total Found: 0</div>
+
+    <!-- Your content goes here -->
+
+    <script src="conveyance_archives.js"></script>
+
+</body>
+</html>
